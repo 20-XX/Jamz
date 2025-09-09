@@ -8,7 +8,7 @@ import json
 RESPONSE_TYPE = 'code'
 SPOTIPY_CLIENT_ID = '64cd3622fa7b4cd587d23ea9d18c1a98'
 SPOTIPY_CLIENT_SECRET = '612689a3bacb4b39a1ce903478d9a43a'
-SPOTIPY_REDIRECT_URI = '127.0.0.1/callback'
+SPOTIPY_REDIRECT_URI = 'http://127.0.0.1/callback'
 SpotifyOAuth.get_authorization_code
 
 def get_auth_header(token):

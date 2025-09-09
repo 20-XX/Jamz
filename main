@@ -1,0 +1,43 @@
+
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+from requests import post, get
+import json
+
+
+RESPONSE_TYPE = 'code'
+SPOTIPY_CLIENT_ID = '64cd3622fa7b4cd587d23ea9d18c1a98'
+SPOTIPY_CLIENT_SECRET = '612689a3bacb4b39a1ce903478d9a43a'
+SPOTIPY_REDIRECT_URI = '127.0.0.1/callback'
+SpotifyOAuth.get_authorization_code
+
+def get_auth_header(token):
+    return {'Authorization': f'Bearer {token}'}
+
+def get_user_token():
+    # This function uses the Authorization Code flow to get a user token
+    sp_oauth = SpotifyOAuth(
+        client_id=SPOTIPY_CLIENT_ID,
+        client_secret=SPOTIPY_CLIENT_SECRET,
+        redirect_uri=SPOTIPY_REDIRECT_URI,
+        scope='user-read-currently-playing'
+    )
+    token_info = sp_oauth.get_access_token()
+    return token_info['access_token']
+
+def user_currently_playing():
+    token = get_user_token()
+    url = 'https://api.spotify.com/v1/me/player/currently-playing'
+    headers = get_auth_header(token)
+    response = get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        print(json.dumps(data, indent=2))
+        return data
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
+        return None
+
+if __name__ == "__main__":
+    user_currently_playing()
+

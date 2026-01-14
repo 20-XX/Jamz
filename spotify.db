@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS tracks (
+    track_id TEXT PRIMARY KEY,
+    track_name TEXT NOT NULL,
+    album_name TEXT,
+    artist_name TEXT
+);

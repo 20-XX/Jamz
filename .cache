@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"access_token": "BQDIbCYEb6r5faDKGIRKccxerQ1h00L2a6aPGgI8NJDESN9BQpiYmoquapkM2crD9L-HJBXiw49BgtKK1iPncrrFY9KfURVn7ZT6Gn0s8hosvMXALZbEzJvqCCVVTzJlYfcZRnHG5JMofB-qYL1sLVHuCkBmrb7-zd5UKAs_uITaJn8pJCF25-6E8Ukwy4ouL4LU554fCs9JhF0ih6jAhVqMffxJ1m8irbSIy1bYO1o9yo9qi54", "token_type": "Bearer", "expires_in": 3600, "refresh_token": "AQC60nMbwj80fAXLOF-ZR5Jb_C2JvkAFIzTJY7JY0g350dEQfxAfE1QZix7z7axriCuCx8XV_NXFp2v_MTH-JMNgAWvi1KVmI040NXPWKsDLx2TM-j4Lb3Xit3wrmOuAulI", "scope": "user-read-currently-playing", "expires_at": 1757447086}
-=======
-
->>>>>>> 305f3e658990bc2b5e5293435a7ee2e22dba5851
+{"access_token": "BQAgN6Sn8qBiobvykoQzr7M5DoydgRF4diQVMqyQnCIXNDW_Y1CGbDixEPRzjMH50Ovok3A0BG-ko5dyU4YcmUMjy3Xa4Bnys7XBtLB1JGa3qsTe6clDEfI4ULK5fcMENpm4rZ-s_Ea9dkAIht93wc6iV_1CUKMtD56gobUbxM61dkv_jxtiDXNgk7wFCmCg6ocfTOD8vtPXRGD6L3aU0KmxjwcD0rLjsTna8Flf9kQqqRpXMUbrTOBkJTXGsY7KuLuD9blGbTtsPOz62AKk-Miysv4asQuK5Bf2Ft6TUgh-wvFpxTfNFCdpElzpOEMPB6vm0S2boNXMur7VGc5e7h9ieFt_OtYuQOuMQig9", "token_type": "Bearer", "expires_in": 3600, "scope": "user-read-currently-playing  user-read-playback-state user-modify-playback-state user-read-recently-played", "expires_at": 1769442303, "refresh_token": "AQAgs0HGIq_cG7sF-5XWhQN4ObQ9zaXREePjqtFOOSv-vbYyGtVxgY_F1Ynz-EHYO-cFvSnAu1szE8HrallXr0tUU3Ee3uVmt71yBXWNWK6OF2B5DmkPchDIzsrv1MMQoaE"}

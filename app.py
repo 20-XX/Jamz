@@ -1,56 +1,55 @@
-import code
-from flask import Flask, jsonify, request, redirect
-from services.spotify_service import get_spotify_client, get_currently_playing
-from db.database import init_db, get_db_connection
-from db.models import extract_track_data, insert_track, insert_listening_history
+from flask import Flask, redirect, request, jsonify
 from spotify.auth import auth_manager
-import spotipy
+
+from routes.ingest import ingest_bp
+from routes.stats import stats_bp
+
+from db.database import init_db
 
 def create_app():
     app = Flask(__name__)
 
+    # --- CONFIG ---
+    app.config["AUTH_MANAGER"] = auth_manager
+
+    # --- INIT DB ---
+    init_db()
+
+    # --- BASIC ROUTES ---
     @app.route("/")
     def health_check():
-        return "Spotify App is running."
-    
+        return {"status": "Jamz backend running"}
+
     @app.route("/login")
     def login():
-        auth_url = auth_manager.get_authorize_url()
-        return redirect(auth_url)
-    
+        return redirect(auth_manager.get_authorize_url())
+
     @app.route("/callback")
     def callback():
-        print("CALLBACK HIT")
-        print("ARGS:", request.args)
         code = request.args.get("code")
+
+        if not code:
+            return jsonify({"error": "Missing Authentication code"}), 400
+
         auth_manager.get_access_token(code)
-        return "Authentication successful. You may close this window."
-
+        return {"message": "Authentication successful"}
     
-    @app.route("/ingest", methods=["POST"])
-    def ingest_currently_playing():
-        if not auth_manager.validate_token(auth_manager.get_cached_token()):
-            return jsonify({"error": "User not authenticated."}), 401
-        
+    @app.route("/me")
+    def me():
+        import spotipy
         sp = spotipy.Spotify(auth_manager=auth_manager)
-        current = sp.current_user_playing_track()
-        print("RAW CURRENTLY PLAYING:", current)
-        if not current or not current.get("item"):
-            return {"message": "No track currently playing"}, 200
+        return sp.current_user()
 
-        item = current["item"]
+    # --- REGISTER BLUEPRINTS ---
+    app.register_blueprint(ingest_bp)
+    app.register_blueprint(stats_bp)
 
-        track = item["name"]
-        artist = ", ".join(a["name"] for a in item["artists"])
+    print("Registered routes:")
+    for rule in app.url_map.iter_rules():
+        print(rule)
 
-        print("INGEST DEBUG:", track, artist)
-
-        return {
-        "track": track,
-        "artist": artist,
-        "message": "Stored track"
-            }, 201
     return app
+
 
 if __name__ == "__main__":
     app = create_app()
